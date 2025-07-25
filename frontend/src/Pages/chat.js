@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../CSS/Chat.css";
+import { marked } from "marked"; // Optional: for markdown support
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -33,20 +34,34 @@ const Chat = () => {
     chatRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const renderMessage = (msg) => {
+    if (msg.type === "user") {
+      return <div className="bubble">{msg.text}</div>;
+    } else {
+      // Render AI message with line breaks and optional markdown
+      const html = marked.parse(msg.text || "");
+      return (
+        <div
+          className="bubble"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      );
+    }
+  };
+
   return (
     <div className="chat-wrapper">
       <div className="chat-header">AI Chat Assistant 🤖</div>
+
       <div className="chat-messages">
         {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`message ${msg.type === "user" ? "user" : "ai"}`}
-          >
-            <div className="bubble">{msg.text}</div>
+          <div key={idx} className={`message ${msg.type}`}>
+            {renderMessage(msg)}
           </div>
         ))}
         <div ref={chatRef} />
       </div>
+
       <div className="chat-input">
         <input
           type="text"
