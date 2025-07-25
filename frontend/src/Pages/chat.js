@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../CSS/Chat.css";
-import { marked } from "marked"; // Optional: for markdown support
+import { marked } from "marked";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false); // ⬅️ Loading state
   const chatRef = useRef(null);
 
   const sendMessage = async () => {
@@ -14,6 +15,7 @@ const Chat = () => {
     const userMessage = { type: "user", text: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
+    setLoading(true); // ⬅️ Start loading
 
     try {
       const res = await axios.post("http://localhost:5000/api/chat", {
@@ -27,25 +29,21 @@ const Chat = () => {
         ...prev,
         { type: "ai", text: "⚠️ Error fetching response." },
       ]);
+    } finally {
+      setLoading(false); // ⬅️ Stop loading
     }
   };
 
   useEffect(() => {
     chatRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, loading]);
 
   const renderMessage = (msg) => {
     if (msg.type === "user") {
       return <div className="bubble">{msg.text}</div>;
     } else {
-      // Render AI message with line breaks and optional markdown
       const html = marked.parse(msg.text || "");
-      return (
-        <div
-          className="bubble"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      );
+      return <div className="bubble" dangerouslySetInnerHTML={{ __html: html }} />;
     }
   };
 
@@ -59,6 +57,18 @@ const Chat = () => {
             {renderMessage(msg)}
           </div>
         ))}
+
+        {/* ⏳ Typing indicator */}
+        {loading && (
+          <div className="message ai">
+            <div className="bubble typing">
+              <span className="dot"></span>
+              <span className="dot"></span>
+              <span className="dot"></span>
+            </div>
+          </div>
+        )}
+
         <div ref={chatRef} />
       </div>
 
@@ -69,8 +79,11 @@ const Chat = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          disabled={loading}
         />
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={sendMessage} disabled={loading}>
+          {loading ? "..." : "Send"}
+        </button>
       </div>
     </div>
   );
