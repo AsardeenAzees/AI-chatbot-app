@@ -113,4 +113,4 @@ ChatApp/
 
 ## 👨‍💻 Developed By
 
-**Asardeen \[Azees]**
+**Asardeen Azees**
