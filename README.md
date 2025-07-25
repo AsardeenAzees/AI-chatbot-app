@@ -8,7 +8,6 @@ A full-stack chatbot web application built with **React**, **Node.js**, and the 
 ## 📸 UI Preview
 
 > ![Chat UI Screenshot](./frontend/public/chat-ui.png)
-<img width="1898" height="869" alt="image" src="https://github.com/user-attachments/assets/389a161f-4d08-4dcf-a764-e2a811f9bad0" />
 
 ---
 
@@ -114,4 +113,4 @@ ChatApp/
 
 ## 👨‍💻 Developed By
 
-**Mohammed \[Asardeen Azees]**
+**Asardeen \[Azees]**
