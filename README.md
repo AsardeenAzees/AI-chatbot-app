@@ -36,8 +36,6 @@ A full-stack chatbot web application built with **React**, **Node.js**, and the 
 
 > ![Chat UI Screenshot](./frontend/public/chat-ui.png)
 
-> _(Upload your screenshot to `frontend/public/` and replace the path or use a hosted image URL)_
-
 ---
 
 ## 🚀 Features
