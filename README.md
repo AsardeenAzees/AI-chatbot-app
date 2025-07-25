@@ -1,31 +1,4 @@
-Absolutely! Here's a **professional `README.md`** for your project that includes:
 
-* Project overview
-* Features
-* Tech stack
-* Setup instructions
-* API info
-* UI screenshot support
-* Demo video placeholder
-* Assumptions & limitations
-
----
-
-### ✅ Where to Add It
-
-Place this file as:
-
-```
-ChatApp/README.md
-```
-
-> It will automatically show up as the main description on your GitHub repo homepage.
-
----
-
-### 📄 Full `README.md` (copy this into your file)
-
-````markdown
 # 💬 AI Chatbot Assistant (Gemini-Powered)
 
 A full-stack chatbot web application built with **React**, **Node.js**, and the **Google Gemini API**. Users can chat in real-time with an AI assistant through a clean, modern, and responsive UI.
