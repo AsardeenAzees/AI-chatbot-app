@@ -1,0 +1,14 @@
+# Node dependencies
+backend/node_modules/
+frontend/node_modules/
+
+# Environment variables
+backend/.env
+
+# VS Code and system files
+.DS_Store
+*.log
+*.env
+
+# Build output (optional if you build frontend)
+frontend/build/
